@@ -7,6 +7,7 @@ const root = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   plugins: [react()],
+  base: '/dietistvianen/',
   build: {
     rollupOptions: {
       input: {
