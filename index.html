@@ -30,7 +30,7 @@
 		@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap');
 		* { box-sizing: border-box; }
 		body { margin: 0; min-width: 320px; background: #181818; }
-		#file-fallback { display: none; }
+		#file-fallback { display: block; }
 		.fallback { position: relative; min-height: calc(100vh - 16px); margin: 8px; overflow: hidden; border-radius: 22px; background: #fff; color: #000; font-family: Inter, sans-serif; }
 		.fallback-video { position: absolute; inset: 235px 0 0; width: 100%; height: calc(100% - 235px); object-fit: cover; }
 		.fallback-shade { position: absolute; inset: 0; background: linear-gradient(to bottom, #fff 0%, transparent 48%, #fff 100%); }
@@ -83,11 +83,15 @@
 		</main>
 	</div>
 	<script>
-		if (window.location.protocol === 'file:') {
-			document.getElementById('root').style.display = 'none';
-			document.getElementById('file-fallback').style.display = 'block';
+		const isViteDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+		if (isViteDevelopment) {
+			document.getElementById('root').style.display = 'block';
+			document.getElementById('file-fallback').style.display = 'none';
+			const script = document.createElement('script');
+			script.type = 'module';
+			script.src = './src/main.tsx';
+			document.body.appendChild(script);
 		}
 	</script>
-	<script type="module" src="./src/main.tsx"></script>
 </body>
 </html>
